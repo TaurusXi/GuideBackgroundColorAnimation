@@ -17,7 +17,7 @@ import cn.taurusxi.guidebackgroundcoloranimation.library.ColorAnimationView;
 
 public class SampleActivity
 		extends FragmentActivity
-		implements ColorAnimationView.OnPageChangeListener {
+		 {
 	private static final int[] resource = new int[]{R.drawable.welcome1, R.drawable.welcome4,
 			R.drawable.welcome3, R.drawable.welcome4};
 	private static final String TAG = SampleActivity.class.getSimpleName();
@@ -45,28 +45,27 @@ public class SampleActivity
 		 * Third: If you call this method like below, make the colors no data, it will create
 		 *          a change color by default.
 		 * */
-		colorAnimationView.setmViewPager(viewPager, this, resource.length);
+		colorAnimationView.setmViewPager(viewPager, resource.length);
+        colorAnimationView.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                Log.e("TAG","onPageScrolled");
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.e("TAG","onPageSelected");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                Log.e("TAG","onPageScrollStateChanged");
+            }
+        });
 		// Four : Also ,you can call this method like this:
 		// colorAnimationView.setmViewPager(viewPager,this,resource.length,0xffFF8080,0xff8080FF,0xffffffff,0xff80ff80);
 	}
 
-	// 实现 OnPageChangeListener的回调方法
-	//Implement OnPageChangeListener callback methods
-	@Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-		Log.e(TAG, "call onPageScrolled method");
-	}
-
-	// 实现 OnPageChangeListener的回调方法
-	//Implement OnPageChangeListener callback methods
-	@Override public void onPageSelected(int position) {
-		Log.e(TAG, "call onPageSelected method");
-	}
-
-	// 实现 OnPageChangeListener的回调方法
-	//Implement OnPageChangeListener callback methods
-	@Override public void onPageScrollStateChanged(int state) {
-		Log.e(TAG, "call onPageScrollStateChanged method");
-	}
 
 
 	public class MyFragmentStatePager

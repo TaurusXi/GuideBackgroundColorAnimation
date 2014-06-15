@@ -20,25 +20,15 @@ public class ColorAnimationView
 	private static final int GREEN = 0xff80ff80;
 	private static final int DURATION = 3000;
 	ValueAnimator colorAnim = null;
-	private ViewPager mViewPager;
+
 	private PageChangeListener mPageChangeListener;
 
-	OnPageChangeListener onPageChangeListener;
+	ViewPager.OnPageChangeListener onPageChangeListener;
 
-	public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+	public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
 		this.onPageChangeListener = onPageChangeListener;
 	}
 
-	/**
-	 * This is used by calling the default OnPageChangeListener for viewpager
-	 * */
-	public static  interface OnPageChangeListener{
-		 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) ;
-
-		 public void onPageSelected(int position) ;
-
-		 public void onPageScrollStateChanged(int state) ;
-	}
 
 
 	/**
@@ -51,24 +41,20 @@ public class ColorAnimationView
 	/**
 	 * This is the only method you need care about.
 	 * @param mViewPager  ,you need set the adpater before you call this.
-	 * @param obj ,this is a Object implements the interface(ColorAnimationView.OnPageChangeListener)
-	 *            so,you can call back.
 	 * @param count   ,this param set the count of the viewpaper's child
 	 * @param colors ,this param set the change color use (int... colors),
 	 *               so,you could set any length if you want.And by default.
 	 *               if you set nothing , don't worry i have already creat
 	 *               a default good change color!
 	 * */
-	public void setmViewPager(ViewPager mViewPager,Object obj, int count, int... colors) {
-		this.mViewPager = mViewPager;
+	public void setmViewPager(ViewPager mViewPager, int count, int... colors) {
+//		this.mViewPager = mViewPager;
 		if (mViewPager.getAdapter() == null) {
 			throw new IllegalStateException(
 					"ViewPager does not have adapter instance.");
 		}
 		mPageChangeListener.setViewPagerChildCount(count);
-		if(obj instanceof OnPageChangeListener){
-			setOnPageChangeListener((OnPageChangeListener)obj);
-		}
+
 		mViewPager.setOnPageChangeListener(mPageChangeListener);
 		if (colors.length == 0) {
 			createDefaultAnimation();
@@ -134,7 +120,7 @@ public class ColorAnimationView
 
 	@Override public void onAnimationUpdate(ValueAnimator animation) {
 		invalidate();
-		long playtime = colorAnim.getCurrentPlayTime();
+//		long playtime = colorAnim.getCurrentPlayTime();
 	}
 
 	private class PageChangeListener
@@ -159,15 +145,22 @@ public class ColorAnimationView
 				ColorAnimationView.this.seek(progress);
 			}
 			// call the method by default
-			onPageChangeListener.onPageScrolled(position,positionOffset,positionOffsetPixels);
+            if (onPageChangeListener!=null){
+                onPageChangeListener.onPageScrolled(position,positionOffset,positionOffsetPixels);
+            }
+
 		}
 
 		@Override public void onPageSelected(int position) {
-			onPageChangeListener.onPageSelected(position);
+            if (onPageChangeListener!=null) {
+                onPageChangeListener.onPageSelected(position);
+            }
 		}
 
 		@Override public void onPageScrollStateChanged(int state) {
-			onPageChangeListener.onPageScrollStateChanged(state);
+            if (onPageChangeListener!=null) {
+                onPageChangeListener.onPageScrollStateChanged(state);
+            }
 		}
 	}
 }

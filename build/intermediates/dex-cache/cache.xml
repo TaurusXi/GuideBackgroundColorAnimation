@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/taurusxi/GuideBackgroundColorAnimation/sample/build/intermediates/pre-dexed/debug/support-v4-19.0.1-3bf117e59e2e0f41bbf9219f2be90cdcf1dd583d.jar"
+        jar="/Applications/Android Studio.app/sdk/extras/android/m2repository/com/android/support/support-v4/19.0.1/support-v4-19.0.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="587da9a481ffd341d2fa091704489b89845ddacd"/>
+    <item
+        dex="/Users/taurusxi/GuideBackgroundColorAnimation/sample/build/intermediates/pre-dexed/debug/classes-64d0a84db198ea3b351e4d332da371ca4cf22da6.jar"
+        jar="/Users/taurusxi/GuideBackgroundColorAnimation/build/intermediates/exploded-aar/GuideBackgroundColorAnimation/library/unspecified/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1759182c0fa5771d4f607bcae4dc8186bca5ddb9"/>
+
+</pre-dex-items>
